@@ -24,7 +24,7 @@ public class BinaryRepresenter {
 		if(num/2 != 0) {
 			convertToBinaryRecursive(sBuff,num/2);
 		}
-		sBuff.insert(0, String.valueOf(num%2));	
+		sBuff.append(String.valueOf(num%2));	
 	}
 
 	public static void main (String args [] ) {
