@@ -1,11 +1,53 @@
 package linkedList;
 
-public class LinkedListDup<T>{
+public class LinkedListDup<T extends Comparable<T>>{
 	Node<T> head ;
 	Node<T> tail;
 	public LinkedListDup() {
 		head = null;
 		tail = null;
+	}
+	public boolean isSorted() {
+		int currentSize = size();
+		if (currentSize == 0) {
+			return true;
+		}
+		Node<T> currentElement = head;
+		Node<T> prevElement = head; 
+		for(int i=0; i < currentSize ; i++) {
+			if(currentElement.getData().compareTo(prevElement.getData()) < 0) {
+				return false;
+			} 
+		}
+		return true;
+	}
+
+
+	public void sort() {
+		HomeMadeSort.quickSort(this,0,this.size()-1);
+		
+	}
+	public void sortedInsert(T data) {
+		int currentSize = size();
+		if (currentSize == 0) {
+			this.append(data);
+		}
+
+		if (!isSorted()) {
+			sort();
+		}
+		int i;
+		for(i=0; i < currentSize ; i++) {
+			if( data.compareTo(this.get(i))  < 0 ) {
+				this.insert(i,data);
+				return;
+			}
+
+		}
+		if (currentSize == i) {
+			this.insert(i,data);
+		}
+		return;
 	}
 
 	public  void push(T data) {
@@ -19,6 +61,10 @@ public class LinkedListDup<T>{
 			head = newNode;
 			return;
 		}
+	}
+	public void deleteAll() {
+		head  = null;
+		tail = null;
 	}
 
 	public  int size() {
@@ -89,32 +135,40 @@ public class LinkedListDup<T>{
 		return this.get(size-1);	
 	}
 
-	public void remove(int index) {
+	public T remove(int index) {
 		int size = this.size();
 		if ((index  <0) || (index >=size)) {
 			throw new IndexOutOfBoundsException();
 		}
+		Node<T>  deleteMe ;
 		if (index == 0) {
+			deleteMe = head;
 			head = head.getNext();
+			return deleteMe.getData();
 		}
 		Node<T> currentElement = head;
 		for(int i=0; i < index-1; i++ ) {
 			currentElement = currentElement.getNext();
 		}
-		Node<T>  deleteMe = currentElement.getNext();
+		deleteMe = currentElement.getNext();
 		currentElement .setNext(deleteMe.getNext());
 		if(deleteMe == tail) {
 			tail = currentElement ;
 		}	
+		return deleteMe.getData();
 	}
 
-	public void removeFirst() {
-		this.remove(0);
+	public T removeFirst() {
+		return this.remove(0);
 	} 
 
-	public void removeLast() {
-		this.remove(this.size()-1);
+	public T removeLast() {
+		return this.remove(this.size()-1);
 	}
+
+
+
+
 
 
 
