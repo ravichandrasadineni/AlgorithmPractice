@@ -1,5 +1,8 @@
 package linkedList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LinkedListDup<T extends Comparable<T>>{
 	Node<T> head ;
 	Node<T> tail;
@@ -22,10 +25,38 @@ public class LinkedListDup<T extends Comparable<T>>{
 		return true;
 	}
 
+	public List<LinkedListDup<T>>  splitList( ) {
+		List<LinkedListDup<T> > breakedList = new ArrayList<LinkedListDup<T> >();
+		int currentSize =  this.size();
+		if(currentSize  ==0 ) {
+			return breakedList;
+		}
+		int firstListSize = (int)Math.ceil((currentSize*1.0)/2.0);
+		int secondListSize =  currentSize - firstListSize;
+		LinkedListDup<T> firstList = new LinkedListDup<T>();
+		LinkedListDup<T> secondList = new LinkedListDup<T>();
+		int currentCopiedPos = 0;
+		for(int i=0; i<firstListSize ; i ++ ) {
+			firstList. append(this.get(currentCopiedPos));
+			currentCopiedPos ++;
+
+		}
+		for(int i=0; i<secondListSize ; i ++ ) {
+			secondList. append(this.get(currentCopiedPos));
+			currentCopiedPos ++;	
+		}
+		breakedList.add(firstList);
+		breakedList.add(secondList);
+		return breakedList;
+
+	} 
+
+
+
 
 	public void sort() {
 		HomeMadeSort.quickSort(this,0,this.size()-1);
-		
+
 	}
 	public void sortedInsert(T data) {
 		int currentSize = size();
