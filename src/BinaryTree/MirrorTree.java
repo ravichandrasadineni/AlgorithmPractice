@@ -1,7 +1,7 @@
 package BinaryTree;
 
 
-public class BinaryTreeHieght<T  extends Comparable<T>>{
+public class MirrorTree<T  extends Comparable<T>>{
 	
 	public static void printTree(Node<Integer> root , String indentLevel) {
 		if(root == null) {
@@ -15,12 +15,15 @@ public class BinaryTreeHieght<T  extends Comparable<T>>{
 		
 	}
 	
-	public static int getHieght(Node<Integer> root ) {
+	public static Node<Integer> getMirror(Node<Integer> root ) {
 		if(root == null) {
-			return 0;
+			
+			return null;
 		}	
-		int hieght =  Math.max(getHieght(root.getLeft()) ,getHieght(root.getRight())) + 1;
-		return hieght;
+		Node<Integer> mirrorRoot = new Node<Integer>(root.getData());
+		mirrorRoot.setRight(getMirror(root.getLeft()));
+		mirrorRoot.setLeft(getMirror(root.getRight()));
+		return mirrorRoot;
 	}	
 
 	public static void main( String args[]) {
@@ -29,11 +32,16 @@ public class BinaryTreeHieght<T  extends Comparable<T>>{
 		rootNode.setRight(new Node<Integer>(11));	
 		rootNode.getLeft().setLeft(new Node<Integer>(8));
 		rootNode.getRight().setRight(new Node<Integer>(12));
-		System.out.println("THe hieght is  " +getHieght(rootNode));
+		System.out.println("Orginal tree");
 		printTree(rootNode, "");
+		Node<Integer> mirrorRoot = getMirror(rootNode);
+		System.out.println("Mirror tree");
+		printTree(mirrorRoot, "");
 	}
 
 } 
+
+
 
 
 

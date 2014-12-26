@@ -4,6 +4,8 @@ class Node<T extends Comparable<T>> {
 	private T data;
 	private Node<T> left;
 	private Node<T> right;
+	Node() {	
+	}
 	Node(T data , Node<T> left, Node<T> right) {
 		this.data  = data;
 		this.left = left;
