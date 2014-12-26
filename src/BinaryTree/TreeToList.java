@@ -35,10 +35,13 @@ public class TreeToList<T  extends Comparable<T>>{
 			LinkedListNode<Integer> rootLLNode = new 
 					LinkedListNode<Integer>(root.getData());
 			LinkedListNode<Integer> leftSubtree =   treeToList(root.getLeft());
-
-			rootLLNode.setLarge(leftSubtree );
-			leftSubtree.setSmall(rootLLNode );
-			return rootLLNode;	
+			LinkedListNode<Integer>  traverseNode = leftSubtree;
+			while(traverseNode.getLarge() !=null) {
+				traverseNode =traverseNode.getLarge();
+			}	
+			traverseNode.setLarge(rootLLNode );
+			rootLLNode.setSmall(traverseNode );
+			return leftSubtree;	
 		}
 
 		LinkedListNode<Integer> rootNode = new LinkedListNode<Integer>(root.getData());
@@ -48,11 +51,11 @@ public class TreeToList<T  extends Comparable<T>>{
 		while(traverseNode.getLarge() !=null) {
 			traverseNode =traverseNode.getLarge();
 		}		
-		traverseNode.setLarge(rightSubtree);
-		rightSubtree.setSmall(leftSubtree);
-		rootNode.setLarge(leftSubtree);
-		leftSubtree.setSmall(rootNode);
-		return rootNode;	
+		traverseNode.setLarge(rootNode);
+		rootNode.setSmall(leftSubtree);
+		rootNode.setLarge(rightSubtree);
+		rightSubtree.setSmall(rootNode);
+		return leftSubtree;	
 	}
 
 	public static void printList(LinkedListNode<Integer>  rootNode) {
