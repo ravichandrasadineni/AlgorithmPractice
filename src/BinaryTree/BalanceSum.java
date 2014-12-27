@@ -42,8 +42,16 @@ public class BalanceSum<T  extends Comparable<T>>{
 			root.setData(left + right)  ;
 		}
 		if(root.getData()   > left + right) {
-			root.getLeft().setData(root.getData()-right);
-			balanceSum(root.getLeft() );
+			if(root.getLeft() !=null){
+				root.getLeft().setData(root.getData()-right);
+				balanceSum(root.getLeft());
+			}
+			else if(root.getRight() !=null) {
+				root.getRight().setData(root.getData()-left);
+				balanceSum(root.getRight());
+			}
+
+			
 		}
 		
 
