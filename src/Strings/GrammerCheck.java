@@ -15,11 +15,9 @@ public class GrammerCheck {
 	 */
 
 	public static void main(String args[]) {
-		String pattern = "[A-Z][a-z]*(\\s[A-Z]?[a-z]*)*[\\w]\\.$";
+		String pattern = "[A-Z][a-z]*(\\s([A-Z]?[a-z]*)+)*[\\w]\\.$";
 		String text = "GeeksQuiz. is a quiz site.";
 		System.out.println(text.matches(pattern));
-
-
 	}
 
 }
