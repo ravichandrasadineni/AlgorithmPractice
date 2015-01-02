@@ -52,7 +52,8 @@ public class KMP {
 
 			if(matchedPtrn == pattern.length) {
 				System.out.println("Found pattern at index " + (txt.length -pattern.length) );
-				matchedTxt += matchedPtrn-1; 
+				matchedTxt += 1;
+				matchedPattern = 0;
 			}
 			else if ((matchedTxt < txt.length) &&(txt[matchedTxt] != 
 					pattern[matchedPtrn])) {
