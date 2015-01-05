@@ -50,7 +50,7 @@ public class LPSDP {
 					}
 					else {
 						preRow[i] = false;
-					}
+						}
 				}
 				else {
 					preRow[i] = false;
