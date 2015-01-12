@@ -13,6 +13,10 @@ public class HeapSortUtility<T extends Comparable<T>>{
 	public int rightChild(int pos) {
 		return (2*pos) +2;
 	}
+	boolean isRightChildExist(int pos) {
+		return (((2*pos) +2) < size);
+		
+	}
 	public int parent(int pos) {
 		return (pos-1)/2;
 	}
@@ -30,9 +34,12 @@ public class HeapSortUtility<T extends Comparable<T>>{
 		}		
 		else {
 			int leftC = inputArray[pos].compareTo(inputArray[leftChild(pos)]);
-			int rightC = inputArray[pos].compareTo(inputArray[rightChild(pos)]);
+			int rightC =0;
+			if(isRightChildExist(pos))
+				 rightC = inputArray[pos].compareTo(inputArray[rightChild(pos)]);
 			int leftRightC =
 					inputArray[leftChild(pos)].compareTo(inputArray[rightChild(pos)]);
+			//if(rightC) 
 			if(leftC  > 0 && rightC >0) {
 				return;
 			}
